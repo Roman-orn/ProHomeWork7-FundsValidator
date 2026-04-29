@@ -30,12 +30,12 @@ public class Main {
                 System.out.println(ex.getMessage());
             }
         } else {
-            balance = getBalance(balance, withdrawal);
+            balance = calculateBalance(balance, withdrawal);
             System.out.printf("Funds are OK. Purchase paid.%nBalance is USD %.2f", balance);
         }
     }
 
-    private static double getBalance(double balance, double withdrawal){
+    private static double calculateBalance(double balance, double withdrawal){
         return balance - withdrawal;
     }
 }
