@@ -1,5 +1,6 @@
 package app;
 
+import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -17,12 +18,19 @@ public class Main {
     }
 
     private static double getAmount(){
-        System.out.printf("Balance is USD %.2f%nEnter purchase amount, USD: ", balance);
         Scanner scanner = new Scanner(System.in);
-        return scanner.nextDouble();
+        while (true){
+            System.out.printf("Balance is USD %.2f%nEnter purchase amount, USD: ", balance);
+            try {
+                return scanner.nextDouble();
+            } catch (InputMismatchException ex) {
+                System.out.println("Invalid input. Try again!\n");
+                scanner.nextLine();
+            }
+        }
     }
 
-    private static void validateAmount(double balance, double withdrawal) throws FundsException{
+    private static void validateAmount(double balance, double withdrawal) {
         if(withdrawal > balance){
             try {
                 throw new FundsException("Insufficient funds!");
