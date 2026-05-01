@@ -5,19 +5,16 @@ import java.util.Scanner;
 
 public class Main {
 
-    static double balance;
-
     static void main(String[] args){
-        balance = getBalance();
-        validateAmount(balance, getAmount());
-
+        double balance = getBalance();
+        validateAmount(balance, getAmount(balance));
     }
 
     private static double getBalance(){
         return 1000.00;
     }
 
-    private static double getAmount(){
+    private static double getAmount(double balance){
         Scanner scanner = new Scanner(System.in);
         while (true){
             System.out.printf("Balance is USD %.2f%nEnter purchase amount, USD: ", balance);
