@@ -1,6 +1,5 @@
 package app;
 
-import java.util.InputMismatchException;
 import java.util.Scanner;
 
 public class Main {
@@ -19,9 +18,16 @@ public class Main {
         while (true){
             System.out.printf("Balance is USD %.2f%nEnter purchase amount, USD: ", balance);
             try {
-                return scanner.nextDouble();
-            } catch (InputMismatchException ex) {
-                System.out.println("Invalid input. Try again!\n");
+                if(!scanner.hasNextDouble()) throw new InputException("Invalid input. Try again!\n");
+
+                double purchaseAmount = scanner.nextDouble();
+
+                if(purchaseAmount <= 0) throw new InputException("The purchase amount cannot be less than zero or equal to zero.\nTry again!\n");
+
+                return purchaseAmount;
+
+            } catch (InputException ex) {
+                System.out.println(ex.getMessage());
                 scanner.nextLine();
             }
         }
@@ -30,8 +36,8 @@ public class Main {
     private static void validateAmount(double balance, double withdrawal) {
         if(withdrawal > balance){
             try {
-                throw new FundsException("Insufficient funds!");
-            } catch (FundsException ex) {
+                throw new InputException("Insufficient funds!");
+            } catch (InputException ex) {
                 System.out.println(ex.getMessage());
             }
         } else {
