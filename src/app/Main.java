@@ -36,8 +36,8 @@ public class Main {
     private static void validateAmount(double balance, double withdrawal) {
         if(withdrawal > balance){
             try {
-                throw new InputException("Insufficient funds!");
-            } catch (InputException ex) {
+                throw new FundsException("Insufficient funds!");
+            } catch (FundsException ex) {
                 System.out.println(ex.getMessage());
             }
         } else {
